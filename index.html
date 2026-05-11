@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dino Explorer · Mesozoico</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="brand">
+      <span class="logo">🦖</span>
+      <div>
+        <h1>Dino Explorer</h1>
+        <small>Era Mesozoica</small>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#/dashboard" data-route="dashboard">📊 Dashboard</a></li>
+      <li><a href="#/catalogo" data-route="catalogo">🦕 Catálogo</a></li>
+      <li><a href="#/timeline" data-route="timeline">⏳ Línea de tiempo</a></li>
+      <li><a href="#/mapa" data-route="mapa">🗺 Mapa de hallazgos</a></li>
+      <li><a href="#/paleontologos" data-route="paleontologos">👨‍🔬 Paleontólogos</a></li>
+      <li><a href="#/comparador" data-route="comparador">⚖ Comparador</a></li>
+    </ul>
+    <div class="api-status" id="apiStatus">Conectando…</div>
+  </nav>
+
+  <main class="content" id="view"></main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <button class="close" data-close>&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div id="formModal" class="modal hidden">
+    <div class="modal-content">
+      <button class="close" data-close>&times;</button>
+      <div id="formBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
