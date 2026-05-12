@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Datos de Dinosaurios</title>
+    <link rel="stylesheet" href="pagina_style.css">
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info span {
+            font-size: 14px;
+        }
+
+        .btn-logout {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación con información de usuario -->
+    <div class="navbar">
+        <h2>🦕 Dinosaurios</h2>
+        <div class="user-info">
+            <span id="userDisplay">Cargando...</span>
+            <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Base de Datos de Dinosaurios</h1>
+        
+        <!-- Barra de búsqueda y filtros -->
+        <div class="filters">
+            <input type="text" id="searchInput" placeholder="Buscar dinosaurio...">
+            <select id="periodFilter">
+                <option value="">Todos los períodos</option>
+            </select>
+            <select id="dietFilter">
+                <option value="">Todas las dietas</option>
+            </select>
+            <button onclick="buscarDinosaurios()">Buscar</button>
+        </div>
+
+        <!-- Área de estado -->
+        <div id="statusMessage" class="status"></div>
+
+        <!-- Tabla de dinosaurios -->
+        <table id="dinosauriosTable" class="table">
+            <thead>
+                <tr>
+                    <th>Nombre Científico</th>
+                    <th>Nombre Común</th>
+                    <th>Período</th>
+                    <th>Dieta</th>
+                    <th>Peso (kg)</th>
+                    <th>Altura (m)</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para detalles -->
+    <div id="detalleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="detalleContent"></div>
+        </div>
+    </div>
+
+    <script src="dinosaurios_data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Verificar autenticación al cargar
+        window.addEventListener('load', () => {
+            const usuario = localStorage.getItem('usuario');
+            if (!usuario) {
+                // No autenticado, redirigir a login
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Mostrar información del usuario
+            try {
+                const userData = JSON.parse(usuario);
+                document.getElementById('userDisplay').textContent = `Bienvenido, ${userData.nombre}`;
+            } catch (error) {
+                console.error('Error parsing user data:', error);
+                logout();
+            }
+        });
+
+        // Cerrar sesión
+        function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                localStorage.removeItem('usuario');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>

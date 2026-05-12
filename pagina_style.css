@@ -1,0 +1,659 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2.5em;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    color: #667eea;
+    margin: 20px 0 15px 0;
+    transition: all 0.3s ease;
+}
+
+h2:hover {
+    transform: translateX(5px);
+    color: #764ba2;
+}
+
+h3 {
+    color: #764ba2;
+    margin: 15px 0 10px 0;
+}
+
+/* Filtros */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+input[type="text"],
+select {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 150px;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: scale(1.02);
+}
+
+button {
+    padding: 10px 20px;
+    background: #667eea;
+    color: white;
+    border: 2px solid #667eea;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover {
+    background: #764ba2;
+    border-color: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(102, 126, 234, 0.2);
+}
+
+/* Mensajes de estado */
+.status {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+    border-left: 4px solid;
+    animation: slideInDown 0.3s ease-out;
+}
+
+.status.success {
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #28a745;
+    border-left: 4px solid #28a745;
+    display: block;
+}
+
+.status.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #dc3545;
+    border-left: 4px solid #dc3545;
+    display: block;
+}
+
+/* Tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.table th {
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.table tbody tr:hover {
+    background: #f9f9f9;
+    transform: scale(1.01);
+    box-shadow: inset 0 0 10px rgba(102, 126, 234, 0.1);
+}
+
+.table tbody tr:active {
+    background: #f0f0f0;
+    transform: scale(0.99);
+}
+
+.table button {
+    padding: 6px 12px;
+    font-size: 12px;
+    background: #764ba2;
+    border: 2px solid #764ba2;
+    transition: all 0.3s ease;
+}
+
+.table button:hover {
+    background: #667eea;
+    border-color: #667eea;
+    transform: scale(1.1) rotate(1deg);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.table button:active {
+    transform: scale(0.95);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 2px solid #667eea;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    transform: rotate(90deg) scale(1.2);
+}
+
+/* Información del dinosaurio en modal */
+.modal-content h2,
+.modal-content h3 {
+    animation: fadeIn 0.5s ease-out;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    animation: fadeIn 0.6s ease-out;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+}
+
+.modal-content p:hover {
+    padding-left: 10px;
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* Listas en modal */
+.modal-content ul {
+    padding-left: 20px;
+}
+
+.modal-content li {
+    margin: 8px 0;
+    transition: all 0.3s ease;
+}
+
+.modal-content li:hover {
+    padding-left: 10px;
+    color: #667eea;
+}
+
+/* Estilos para detalles de dinosaurios con imágenes */
+.detalle-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.detalle-imagen-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slideInLeft 0.6s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.detalle-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.detalle-imagen-container:hover .detalle-imagen {
+    transform: scale(1.05);
+}
+
+.detalle-imagen-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.detalle-periodo-badge {
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detalle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: slideInRight 0.6s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.detalle-nombre-comun {
+    font-size: 18px;
+    color: #764ba2;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detalle-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.stat-item {
+    background: linear-gradient(135deg, #f5f7fa 0%, #f9f9f9 100%);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-item:hover {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
+}
+
+.stat-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+}
+
+.detalle-periodo {
+    background: linear-gradient(135deg, #f0f4ff 0%, #f5ebff 100%);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #764ba2;
+}
+
+.detalle-periodo p {
+    margin: 5px 0;
+}
+
+.periodo-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.detalle-dieta {
+    background: #fff9e6;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+}
+
+.descripcion-text {
+    font-style: italic;
+    color: #555;
+    padding: 15px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+    border-left: 4px solid #667eea;
+    border-radius: 5px;
+    line-height: 1.8;
+}
+
+.detalle-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #eee;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.detalle-section h3 {
+    margin-bottom: 20px;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+}
+
+.hallazgos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.hallazgo-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+.hallazgo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.hallazgo-pais {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.hallazgo-anio {
+    display: block;
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.estudios-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.estudio-card {
+    background: white;
+    border: 2px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border-left: 4px solid #667eea;
+}
+
+.estudio-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+}
+
+.estudio-autor {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.estudio-fecha {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Responsive para detalles */
+@media (max-width: 768px) {
+    .detalle-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .detalle-imagen-container {
+        max-width: 100%;
+        aspect-ratio: auto;
+        height: 300px;
+    }
+
+    .detalle-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hallazgos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .estudios-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    input[type="text"],
+    select {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 12px;
+    }
+
+    .table th,
+    .table td {
+        padding: 8px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 20% auto;
+    }
+}
+
+p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+li {
+    margin: 5px 0;
+}
