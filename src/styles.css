@@ -23,6 +23,119 @@ body {
   display: grid;
   grid-template-columns: 260px 1fr;
 }
+body.login-mode {
+  display: block;
+  background: radial-gradient(circle at 30% 20%, #1c3a14 0%, var(--bg) 55%);
+}
+
+/* ---------- Login ---------- */
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+.login-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  text-align: center;
+}
+.login-logo { font-size: 3.5rem; margin-bottom: .5rem; }
+.login-card h1 { font-size: 1.5rem; margin-bottom: .3rem; }
+.login-subtitle { color: var(--muted); font-size: .9rem; margin-bottom: 1.5rem; }
+.login-form { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
+.login-form label { font-size: .8rem; color: var(--muted); display: block; }
+.login-form input {
+  width: 100%;
+  margin-top: .3rem;
+  padding: .65rem .8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  font-size: .95rem;
+}
+.login-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(126,231,135,.15);
+}
+.login-form button {
+  padding: .75rem;
+  background: linear-gradient(135deg, var(--accent-2), #5a9333);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: .95rem;
+  margin-top: .5rem;
+}
+.login-form button:disabled { opacity: .6; cursor: not-allowed; }
+.login-switch {
+  margin-top: 1rem;
+  font-size: .85rem;
+  color: var(--muted);
+}
+.login-switch a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.login-switch a:hover { text-decoration: underline; }
+.login-hint {
+  margin-top: 1.5rem;
+  padding: .8rem;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: .8rem;
+  color: var(--muted);
+  border-left: 3px solid var(--blue);
+}
+.login-hint code {
+  background: var(--panel-2);
+  padding: .15rem .4rem;
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: monospace;
+}
+
+/* ---------- User box (sidebar) ---------- */
+.user-box {
+  margin: 1rem 0;
+  padding: .8rem;
+  background: var(--panel);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.user-info { display: flex; align-items: center; gap: .7rem; margin-bottom: .6rem; }
+.avatar-mini {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--blue));
+  display: grid; place-items: center;
+  font-weight: bold; font-size: .9rem;
+  color: var(--bg); flex-shrink: 0;
+}
+.user-name { font-size: .85rem; font-weight: 500; }
+.user-info small { color: var(--muted); font-size: .7rem; word-break: break-all; }
+.logout-btn {
+  width: 100%;
+  padding: .4rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .75rem;
+  transition: all .15s;
+}
+.logout-btn:hover { background: var(--red); color: white; border-color: var(--red); }
 
 /* ---------- Sidebar ---------- */
 .sidebar {

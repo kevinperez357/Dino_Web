@@ -1,20 +1,46 @@
-# Dino Explorer (Frontend)
+# Dino Explorer
 
-Página estática que consume la API de `Dino_backend`.
+Web estática construida con TypeScript + Vite que explora información sobre dinosaurios. **No requiere backend ni base de datos** — los datos (extraídos de `DinoDB.sql`) viven embebidos en el bundle (`src/data.ts`).
 
-## Uso
+## Desarrollo local
 
-1. Importa `DinoDB.sql` en MySQL.
-2. Levanta el backend (`cd Dino_backend && npm install && npm start`).
-3. Abre `index.html` directamente en el navegador, o sirve la carpeta:
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build       # genera dist/
+npm run preview     # previsualiza el build
+```
+
+## Despliegue a GitHub Pages
+
+1. Crea el repo en GitHub y sube este proyecto:
+   ```bash
+   git init
+   git remote add origin https://github.com/<usuario>/Dino_Web.git
+   git add . && git commit -m "init"
+   git branch -M main
+   git push -u origin main
    ```
-   npx serve .
-   ```
+2. En `vite.config.ts` ajusta `base` al nombre del repo (por defecto `/Dino_Web/`).
+3. En GitHub: **Settings → Pages → Source: GitHub Actions**.
+4. El workflow `.github/workflows/deploy.yml` compila y publica automáticamente. La URL queda en `https://<usuario>.github.io/Dino_Web/`.
 
-Endpoint API esperado: `http://localhost:3000/api`. Cámbialo en `app.js` si difiere.
+## Arquitectura
 
-## Funciones
+```
+src/
+├── main.ts             # bootstrap
+├── data.ts             # base de datos en memoria (seed de DinoDB.sql)
+├── api.ts              # cliente "API" local (Promise-based, simula latencia)
+├── router.ts           # router por hash
+├── types.ts            # interfaces del dominio
+├── utils/              # dom, toast, modal, charts
+└── views/              # dashboard, catalogo, timeline, mapa, paleontologos, comparador
+```
 
-- Stats globales (totales por entidad)
-- Listado de dinosaurios con filtros por período, dieta y búsqueda
-- Vista de detalle con hallazgos por país y estudios de paleontólogos
+Las operaciones CRUD del catálogo modifican el estado **en memoria** (no persisten al recargar).
